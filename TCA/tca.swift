@@ -69,7 +69,7 @@ let template = Template(
         ),
         .directory(
             path: featureFrameworkPath,
-            sourcePath: resourcePath("Resources")
+            sourcePath: templatePath("Resources")
         ),
         .file(
             path: featureFrameworkPath + "/Tests/Sources/\(featureAttribute)Tests.swift",
