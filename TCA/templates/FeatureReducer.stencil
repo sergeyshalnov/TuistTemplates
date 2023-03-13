@@ -1,0 +1,54 @@
+import ComposableArchitecture
+
+public struct {{ feature }}Reducer: ReducerProtocol {
+    public struct State: Equatable {
+        public init() { }
+    }
+
+    public enum Action {
+        public enum View: Equatable {
+            case didAppear
+        }
+
+        public enum Delegate: Equatable {
+
+        }
+
+        public enum Reducer: Equatable {
+            case refresh
+        }
+
+        case view(View)
+        case delegate(Delegate)
+        case reducer(Reducer)
+    }
+
+    // MARK: - Init
+
+    public init() { }
+
+    // MARK: - ReducerProtocol
+
+    public var body: some ReducerProtocolOf<Self> {
+        Reduce { state, action in
+            switch action {
+            case let .view(action):
+                return reduce(into: &state, action: action)
+            case let .reducer(action):
+                return reduce(into: &state, action: action)
+            case .delegate:
+                return .none
+            }
+        }
+    }
+
+    // MARK: - Reducers
+
+    private func reduce(into state: inout State, action: Action.View) -> EffectTask<Action> {
+        .none
+    }
+
+    private func reduce(into state: inout State, action: Action.Reducer) -> EffectTask<Action> {
+        .none
+    }
+}

@@ -1,0 +1,6 @@
+sources:
+  - App/{{ name }}/Sources
+templates:
+  - Templates/Sourcery/ReducerAction.stencil
+output:
+    App/{{ name }}/Sources/Generated

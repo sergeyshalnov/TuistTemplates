@@ -1,0 +1,28 @@
+import ComposableArchitecture
+import SwiftUI
+
+public struct {{ feature }}View: View {
+    struct ViewState: Equatable {
+        init(state: {{ feature }}Reducer.State) {
+            // Tranform reducer state to view state
+        }
+    }
+
+    // MARK: - Private Properties
+
+    private let store: StoreOf<{{ feature }}Reducer>
+
+    // MARK: - Init
+
+    public init(store: StoreOf<{{ feature }}Reducer>) {
+        self.store = store
+    }
+
+    // MARK: - UI
+
+    public var body: some View {
+        WithViewStore(store, observe: ViewState.init) { _ in
+            Text("Hello, world! 👋")
+        }
+    }
+}

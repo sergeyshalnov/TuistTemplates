@@ -1,0 +1,8 @@
+import XCTest
+@testable import {{ feature }}
+
+final class {{ feature }}Tests: XCTestCase {
+    func test() {
+
+    }
+}

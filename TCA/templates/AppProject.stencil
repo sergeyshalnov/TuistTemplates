@@ -1,0 +1,60 @@
+import ProjectDescription
+import ProjectDescriptionHelpers
+
+let platform: Platform = {% if platform == "ios" %}.iOS{% elif platform == "macos" %}.macOS{% elif platform == "tvos" %}.tvOS{% endif %}
+
+let project = Project(
+    name: "App",
+    organizationName: "io.tuist",
+    settings: .settings(configurations: [
+        .debug(
+            name: "Debug",
+            settings: SettingsDictionary()
+                .swiftActiveCompilationConditions("DEBUG")
+        ),
+        .release(
+            name: "Release",
+            settings: SettingsDictionary()
+                .swiftActiveCompilationConditions("APPSTORE")
+        )
+    ]),
+    targets: [
+        Project.makeApp(
+            name: "App",
+            platform: platform,
+            dependencies: [
+                .target(name: "{{ feature }}"),
+                .target(name: "UI"),
+                .target(name: "Services"),
+                .target(name: "Common")
+            ]
+        ),
+        Project.makeFramework(
+            name: "{{ feature }}",
+            platform: platform,
+            dependencies: [
+                .external(name: "ComposableArchitecture")
+            ]
+        ),
+        Project.makeFramework(
+            name: "UI",
+            platform: platform,
+            dependencies: [
+                .target(name: "Common")
+            ]
+        ),
+        Project.makeFramework(
+            name: "Services",
+            platform: platform,
+            dependencies: [
+                .target(name: "Common")
+            ]
+        ),
+        Project.makeFramework(
+            name: "Common",
+            platform: platform,
+            dependencies: []
+        )
+    ]
+    .flatMap { $0 }
+)

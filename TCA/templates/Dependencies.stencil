@@ -1,0 +1,18 @@
+import ProjectDescription
+import ProjectDescriptionHelpers
+
+let packages: [Package] = [
+    .package(url: "https://github.com/pointfreeco/swift-composable-architecture", .upToNextMajor(from: "0.50.2"))
+]
+
+let dependencies = Dependencies(
+    swiftPackageManager: .init(
+        packages
+    ),
+    platforms: [
+      {% if platform == "ios" %}  .iOS
+      {% elif platform == "macos" %}  .macOS
+      {% elif platform == "tvos" %}  .tvOS
+      {% endif %}
+    ]
+)

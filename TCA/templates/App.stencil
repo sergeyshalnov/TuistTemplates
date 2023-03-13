@@ -1,0 +1,22 @@
+import ComposableArchitecture
+import {{ feature }}
+import SwiftUI
+
+@main
+struct {{ name }}App: App {
+
+    // MARK: - Private Properties
+
+    private let store = Store(
+        initialState: .init(),
+        reducer: {{ feature }}Reducer()
+    )
+    
+    // MARK: - UI
+
+    var body: some Scene {
+        WindowGroup {
+            {{ feature }}View(store: store)
+        }
+    }
+}
